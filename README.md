@@ -1,6 +1,6 @@
-#Fallout 4 Hacking Minigame 🖥️👩‍💻
+# Fallout 4 Hacking Minigame 🖥️👩‍💻
 
-##Desc
+## Desc
 - Jednoduchá hackovací minihra s předlohou ve hře Fallou 4
 - V podstatě se jedná o hru kde hádáme slovo [video s vysvětlením](https://youtu.be/bx_4zoUL0aY)
 - Plánuji přidat systém získávání XP a popřípadě jiných věcí za správně hacknutí terminálu
