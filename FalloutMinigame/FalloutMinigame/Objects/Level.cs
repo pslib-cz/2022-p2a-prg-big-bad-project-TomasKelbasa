@@ -11,6 +11,7 @@ namespace FalloutMinigame.Objects
     {
         static private int _nextId = 0;
         static private int _defaultDifficulty = 0;
+        static private int _numberOfLines = 15;
         static private string _symbols = "<>.-?!{}[]/";
         static int GenerateId()
         {
@@ -36,7 +37,6 @@ namespace FalloutMinigame.Objects
             Id = GenerateId();
             Words = GenerateWords();
             _correctWord = Words[Random.Shared.Next(0, Words.Count)];
-            Console.WriteLine(string.Join("\n", Words));
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace FalloutMinigame.Objects
             try
             {
                 StreamReader reader = new StreamReader("./Resource/" + (Difficulty + 4).ToString() + "_letter.txt");
-                possibleWords = reader.ReadToEnd().Split(",");
+                possibleWords = reader.ReadToEnd().ToUpper().Split(",");
             }
             catch (Exception e)
             {
@@ -76,7 +76,7 @@ namespace FalloutMinigame.Objects
         public List<string> GenerateOutput()
         {
             List<string> output = new List<string>();
-            int[] wordsPerLine = new int[10];
+            int[] wordsPerLine = new int[_numberOfLines];
             for(int i = 0; i < wordsPerLine.Length; i++)
             {
                 wordsPerLine[i] = 0;
@@ -90,13 +90,40 @@ namespace FalloutMinigame.Objects
                 }
 
             }
-
+            string exampleLine = "";
+            for (int j = 0; j < 50; j++)
+            {
+                exampleLine += "#";
+            };
+            int counter = 0;
+            int c = Random.Shared.Next(17, 50);
             foreach(int i in wordsPerLine)
             {
-                
+                int o = i;
+                string line = exampleLine.Substring(0);
+                while(o > 0)
+                {
+                    int rnd = Random.Shared.Next(0,exampleLine.Length - Words[0].Length);
+                    if (exampleLine.Contains(line.Substring(rnd, Words[0].Length)))
+                    {   
+                        line = line.Substring(0, rnd) + Words[counter] + line.Substring((rnd + Words[0].Length));
+                        counter++;
+                        o--;
+                    }
+                }
+                for(int q = 0; q < line.Length; q++)
+                {
+                    if (line[q].Equals('#'))
+                    {
+                        line = line.Substring(0, q) + _symbols[Random.Shared.Next(0, _symbols.Length)] + line.Substring(q + 1);
+                    }
+
+                }
+                line = "0x" + (c++).ToString("X") + " " + line;
+                output.Add(line);
             }
 
-            return new List<string> { String.Join(",", wordsPerLine) };
+            return output;
         }
 
     }
