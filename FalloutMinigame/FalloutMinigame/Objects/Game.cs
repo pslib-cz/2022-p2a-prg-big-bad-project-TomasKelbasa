@@ -23,6 +23,7 @@ namespace FalloutMinigame.Objects
         public int WordsCount { get 
             { return 8 + Difficulty * 2; }
             private set { } }
+        private string _correctWord = "";
 
         /// <summary>
         ///     Creates new object Game
@@ -34,6 +35,7 @@ namespace FalloutMinigame.Objects
             else Difficulty = _defaultDifficulty;
             Id = GenerateId();
             Words = GenerateWords();
+            _correctWord = Words[Random.Shared.Next(0, Words.Count)];
             Console.WriteLine(string.Join("\n", Words));
         }
 
@@ -48,7 +50,7 @@ namespace FalloutMinigame.Objects
             String[] possibleWords = new string[] {};
             try
             {
-                StreamReader reader = new StreamReader("../../../Resource/" + (Difficulty + 4).ToString() + "_letter.txt");
+                StreamReader reader = new StreamReader("./Resource/" + (Difficulty + 4).ToString() + "_letter.txt");
                 possibleWords = reader.ReadToEnd().Split(",");
             }
             catch (Exception e)
