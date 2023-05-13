@@ -1,4 +1,4 @@
-# Fallout 4 Hacking Minigame 🖥️👩‍💻
+# Fallout 4 Hacking Minigame ☢️🖥️👨🏻‍💻
 
 ## Desc
 - Jednoduchá hackovací minihra s předlohou ve hře Fallou 4
@@ -6,5 +6,10 @@
 - Plánuji přidat systém získávání XP a popřípadě jiných věcí za správně hacknutí terminálu
 - V plánu je také přidat větší obtížnosti termináluů (= více slov na výběr, delší slova)
 - Po neúspěšném nabourání terminálu se hra na několik sekund uzamkne
+
+## Pokud se budu nudit
+- Savy budou šifrované
+- Systém perků
+- Tajemství
 
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/vdeMqflE)
