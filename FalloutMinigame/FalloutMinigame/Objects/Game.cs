@@ -39,6 +39,7 @@ namespace FalloutMinigame.Objects
 
         /// <summary>
         ///     Vygeneruje seznam slov, které bude hráč hádat podle obtínosti. Čím vyšší obtížnost, tím delší slova a tím více slov.
+        ///     Je zajištěno že slova nejsou stejná.
         /// </summary>
         /// <returns>Vrací seznam slov ve formátu List</returns>
         private List<string> GenerateWords()
@@ -66,10 +67,13 @@ namespace FalloutMinigame.Objects
 
             return words;
         }
-
+        /// <summary>
+        ///     Generuje output připravený k zobrazení pro uživatele. Náhodné znaky čerpá z <see cref="_symbols"/>.
+        /// </summary>
+        /// <returns>Vrací output připravený k zobrazení rozdělený na jednotlivé řádky.</returns>
         public List<string> GenerateOutput()
         {
-            string output = String.Empty;
+            List<string> output = new List<string>();
             int[] wordsPerLine = new int[10];
             for(int i = 0; i < wordsPerLine.Length; i++)
             {
@@ -83,6 +87,11 @@ namespace FalloutMinigame.Objects
                     wordsPerLine[rnd]++;
                 }
 
+            }
+
+            foreach(int i in wordsPerLine)
+            {
+                
             }
 
             return new List<string> { String.Join(",", wordsPerLine) };
