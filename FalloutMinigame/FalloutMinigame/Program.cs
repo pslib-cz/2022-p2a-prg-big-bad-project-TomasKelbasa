@@ -3,5 +3,5 @@ using FalloutMinigame.Objects;
 
 Console.WriteLine("Hello, World!");
 
-Game test = new Game(0);
+Level test = new Level(0);
 Console.WriteLine(test.GenerateOutput()[0]);

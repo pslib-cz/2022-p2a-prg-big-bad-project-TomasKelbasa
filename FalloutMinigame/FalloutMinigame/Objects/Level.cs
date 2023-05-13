@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FalloutMinigame.Objects
 {
-    internal class Game
+    internal class Level
     {
         static private int _nextId = 0;
         static private int _defaultDifficulty = 0;
@@ -26,10 +26,10 @@ namespace FalloutMinigame.Objects
         private string _correctWord = "";
 
         /// <summary>
-        ///     Creates new object Game
+        ///     Creates new object Level
         /// </summary>
         /// <param name="difficulty">Obtížnost (0 - nejlehčí, 5 - nejtěžší)</param>
-        public Game(int difficulty)
+        public Level(int difficulty)
         {
             if(difficulty >= 0 && difficulty <= 5) Difficulty = difficulty;
             else Difficulty = _defaultDifficulty;
