@@ -13,4 +13,7 @@ Imitace minihry z Fallout 4 vytvořená v C#
 - Systém perků
 - Tajemství
 
+### Poděkování
+- Chtěl bych poděkovat [této stránce](https://copylists.com/) za vypůjčení seznamů slov
+
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/vdeMqflE)
