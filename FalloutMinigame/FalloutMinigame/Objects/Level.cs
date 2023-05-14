@@ -25,18 +25,28 @@ namespace FalloutMinigame.Objects
             { return 8 + Difficulty * 2; }
             private set { } }
         private string _correctWord = "";
+        public int RemainingAttempts { get; private set; }
 
         /// <summary>
         ///     Creates new object Level
         /// </summary>
         /// <param name="difficulty">Obtížnost (0 - nejlehčí, 5 - nejtěžší)</param>
-        public Level(int difficulty)
+        /// <param name="attempts">Počet pokusů</param>
+        public Level(int difficulty, int attempts = 5)
         {
             if(difficulty >= 0 && difficulty <= 5) Difficulty = difficulty;
             else Difficulty = _defaultDifficulty;
             Id = GenerateId();
             Words = GenerateWords();
             _correctWord = Words[Random.Shared.Next(0, Words.Count)];
+            if(attempts > 0)
+            {
+                RemainingAttempts = attempts;
+            }
+            else
+            {
+                RemainingAttempts = 5;
+            }
         }
 
         /// <summary>
@@ -124,6 +134,40 @@ namespace FalloutMinigame.Objects
             }
 
             return output;
+        }
+
+        /// <summary>
+        ///     Porovnává se správným slovem. Pokud hráč zadá heslo které není na seznamu slov, tak se mu pokus neodečte.
+        /// </summary>
+        /// <param name="input">Hráčem zadaný vstup</param>
+        /// <returns>Vrací počet znaků, které jsou na správném místě. Pokud jsou všechny správně tak vrací hodnotu 100. V případě, že hráč se pokusí zadat slovo, které si vymyslel, vrátí program -1.</returns>
+        public int Guess(string input)
+        {
+            input = input.ToUpper();
+            int count = 0;
+            if (input.Length == _correctWord.Length && Words.Contains(input) && RemainingAttempts > 0)
+            {
+                for (int i = 0; i < _correctWord.Length; i++)
+                {
+                    if (_correctWord[i].Equals(input[i]))
+                    {
+                        count++;
+                    }
+                }
+                if (count == _correctWord.Length)
+                {
+                    return 100;
+                }
+                else
+                {
+                    RemainingAttempts--;
+                    return count;
+                }
+            }
+            else
+            {
+                return -1;
+            }
         }
 
     }

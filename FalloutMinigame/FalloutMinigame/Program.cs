@@ -6,3 +6,5 @@ foreach(var o in test.GenerateOutput())
 {
     Console.WriteLine(o);
 }
+
+Console.WriteLine(test.Guess("UNWEARIED"));
