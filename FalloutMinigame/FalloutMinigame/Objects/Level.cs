@@ -12,7 +12,7 @@ namespace FalloutMinigame.Objects
         static private int _nextId = 0;
         static private int _defaultDifficulty = 0;
         static private int _numberOfLines = 15;
-        static private string _symbols = "<>.-?!{}[]/";
+        static private string _symbols = "<>.-?!}{][/";
         static int GenerateId()
         {
             return _nextId++;
@@ -113,10 +113,10 @@ namespace FalloutMinigame.Objects
                 string line = exampleLine.Substring(0);
                 while(o > 0)
                 {
-                    int rnd = Random.Shared.Next(0,exampleLine.Length - Words[0].Length);
-                    if (exampleLine.Contains(line.Substring(rnd, Words[0].Length)))
+                    int rnd = Random.Shared.Next(1,exampleLine.Length - Words[0].Length);
+                    if (exampleLine.Contains(line.Substring(rnd - 1, Words[0].Length + 1)))
                     {   
-                        line = line.Substring(0, rnd) + Words[counter] + line.Substring((rnd + Words[0].Length));
+                        line = line.Substring(0, rnd) + Words[counter] + line.Substring(rnd + Words[0].Length);
                         counter++;
                         o--;
                     }
