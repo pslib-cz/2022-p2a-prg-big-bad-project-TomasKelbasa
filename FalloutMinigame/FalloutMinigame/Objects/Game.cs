@@ -21,7 +21,7 @@ namespace FalloutMinigame.Objects
         private static string ReadStringInput()
         {
             Console.Write("> ");
-            string input = Console.ReadLine();
+            string input = "" + Console.ReadLine();
             input = input.ToUpper();
             input = input.Trim();
             return input;
@@ -41,8 +41,9 @@ namespace FalloutMinigame.Objects
         {
             Console.Clear();
             try {
-                StreamReader s = new StreamReader("./Resource/Logo.txt");
-                Console.WriteLine(s.ReadToEnd());
+
+                Console.WriteLine(new StreamReader("./Resource/Logo.txt").ReadToEnd());
+
             } catch (FileNotFoundException ex)
             {
                 Console.WriteLine("Logo.txt file not found.");
