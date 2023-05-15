@@ -19,3 +19,4 @@ C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMin
 C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Debug\net6.0\Resource\7_letter.txt
 C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Debug\net6.0\Resource\8_letter.txt
 C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Debug\net6.0\Resource\9_letter.txt
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Debug\net6.0\Resource\Logo.txt

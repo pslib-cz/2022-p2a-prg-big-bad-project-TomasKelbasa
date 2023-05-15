@@ -13,6 +13,7 @@ namespace FalloutMinigame.Objects
         public int XP { get; private set; }
 
         public string Name { get; private set; }
+        public int TimeBonus { get; private set; }
 
         public Player(string name) {
         
