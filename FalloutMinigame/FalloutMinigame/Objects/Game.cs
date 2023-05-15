@@ -80,7 +80,7 @@ namespace FalloutMinigame.Objects
             Console.WriteLine("Jak ale funguje nabourávání terminálů? Skvělá otázka. Máš vždy pouze pár pokusů na to uhodnout správné heslo. Heslo je vždy jedno ze slov, které uvidíš. Naštěstí pokud zvolíš nesprávné heslo, tak se dozvíš kolik znaků je správných.");
             Console.WriteLine("\nPříklad - správným heslem je slovo HUMAN avšak hráč zvolil slovo CURVE. Počítač mu řekne že pouze jeden znak je správný (jedná se o písmenu U). Poté hráč zvolil slovo MOTOR, na to mu počítač odpověděl nulou (žádný znak není správně).");
             Console.WriteLine("\nBohužel když hráči dojdou pokusy, tak prohrál a musí počkat několik sekund než bude moct znovu hrát.");
-            Console.WriteLine("\nTerminály mají několik stupňů obtížnosti - čím vyšší obtížnost, tím více slov, tím delší slova a tím více XP za úspěšné prolomení terminálu");
+            Console.WriteLine("\nTerminály mají také několik stupňů obtížnosti - čím vyšší obtížnost, tím více slov, tím delší slova a tím více XP za úspěšné prolomení terminálu");
             Console.WriteLine("\nPress Enter to return to main menu");
             ReadStringInput();
             Menu();
