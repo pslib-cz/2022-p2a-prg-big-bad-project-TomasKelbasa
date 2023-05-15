@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace FalloutMinigame.Objects
     internal class Game
     {
 
-        public Player currentPlayer {  get; private set; }
+        public Player currentPlayer { get; private set; }
 
         public Game(Player player)
         {
@@ -30,7 +31,7 @@ namespace FalloutMinigame.Objects
         {
             Console.Clear();
             Level newlvl = new Level(difficulty, attempts);
-            foreach(var line in newlvl.GenerateOutput())
+            foreach (var line in newlvl.GenerateOutput())
             {
                 Console.WriteLine(line.ToString());
             }
@@ -39,25 +40,29 @@ namespace FalloutMinigame.Objects
         private void Menu()
         {
             Console.Clear();
-            try{
+            try {
                 StreamReader s = new StreamReader("./Resource/Logo.txt");
                 Console.WriteLine(s.ReadToEnd());
-            }catch(FileNotFoundException ex)
+            } catch (FileNotFoundException ex)
             {
                 Console.WriteLine("Logo.txt file not found.");
             }
-            Console.WriteLine("[1] - New level\n[2] - Stats\n[3] - Save & Exit");
+            Console.WriteLine("\nPlayer: {0}\n", currentPlayer.Name);
+            Console.WriteLine("[0] - Help\n[1] - New level\n[2] - Stats\n[3] - Save & Exit\n");
             var input = "";
             do
             {
                 input = ReadStringInput();
-                if(input.Equals("1") || input.Equals("2") || input.Equals("3"))
+                if (input.Equals("0") || input.Equals("1") || input.Equals("2") || input.Equals("3"))
                 {
                     break;
                 }
-            }while (true);
+            } while (true);
             switch (input)
             {
+                case "0":
+                    Help();
+                    break;
                 case "1":
                     NewLevel(2);
                     break;
@@ -68,12 +73,23 @@ namespace FalloutMinigame.Objects
                     break;
             }
         }
-
+        private void Help()
+        {
+            Console.Clear();
+            Console.WriteLine("Vítej ve hře Fallout Hacking!\nTvým úkolem je zde prolamovat terminály. Za úspěšné prolomení terminálu budeš odměněn XP, za neúspěšné budeš časově penalyzován.");
+            Console.WriteLine("Jak ale funguje nabourávání terminálů? Skvělá otázka. Máš vždy pouze pár pokusů na to uhodnout správné heslo. Heslo je vždy jedno ze slov, které uvidíš. Naštěstí pokud zvolíš nesprávné heslo, tak se dozvíš kolik znaků je správných.");
+            Console.WriteLine("\nPříklad - správným heslem je slovo HUMAN avšak hráč zvolil slovo CURVE. Počítač mu řekne že pouze jeden znak je správný (jedná se o písmenu U). Poté hráč zvolil slovo MOTOR, na to mu počítač odpověděl nulou (žádný znak není správně).");
+            Console.WriteLine("\nBohužel když hráči dojdou pokusy, tak prohrál a musí počkat několik sekund než bude moct znovu hrát.");
+            Console.WriteLine("\nTerminály mají několik stupňů obtížnosti - čím vyšší obtížnost, tím více slov, tím delší slova a tím více XP za úspěšné prolomení terminálu");
+            Console.WriteLine("\nPress Enter to return to main menu");
+            ReadStringInput();
+            Menu();
+        }
         private void Stats()
         {
             Console.Clear();
             Console.WriteLine("Statiska");
-            Console.WriteLine("Press anything to return to main menu");
+            Console.WriteLine("Press Enter to return to main menu");
             ReadStringInput();
             Menu();
         }
