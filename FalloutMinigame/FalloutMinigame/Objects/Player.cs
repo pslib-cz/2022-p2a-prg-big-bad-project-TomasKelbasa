@@ -23,6 +23,8 @@ namespace FalloutMinigame.Objects
         ///     Jméno hráče
         /// </summary>
         public string Name { get; private set; }
+
+        public DateTime CreatedAt { get; private set; }
         public int TimeBonus { get; private set; } = 0;
 
         /// <summary>
@@ -37,6 +39,7 @@ namespace FalloutMinigame.Objects
 
         public Player(string name) {
         
+            CreatedAt = DateTime.Now;
             Name = name;
             XP = 0;
             Level = 0;
@@ -69,6 +72,20 @@ namespace FalloutMinigame.Objects
             Console.WriteLine("LEVEL UP!");
             Console.WriteLine("Choose a new perk");
 
+        }
+
+        public string GetStats()
+        {
+            string stats = string.Empty;
+            stats += "Name: " + Name;
+            stats += "\nCreated at: " + CreatedAt;
+            stats += "\nLevel: " + Level;
+            stats += "\nXP: " + XP;
+            stats += "\nLevelsPlayed: " + (WonLevels + LostLevels);
+            stats += "\nWonLevels: " + WonLevels;
+            stats += "\nLostLevels: " + LostLevels;
+
+            return stats;
         }
 
     }

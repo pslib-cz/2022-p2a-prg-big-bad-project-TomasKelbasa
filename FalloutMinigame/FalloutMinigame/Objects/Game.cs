@@ -159,8 +159,9 @@ namespace FalloutMinigame.Objects
         private void Stats()
         {
             Console.Clear();
-            Console.WriteLine("Statiska");
-            Console.WriteLine("Press Enter to return to main menu");
+            Console.WriteLine("Stats\n");
+            Console.WriteLine(currentPlayer.GetStats());
+            Console.WriteLine("\nPress Enter to return to main menu");
             ReadStringInput();
             Menu();
         }
