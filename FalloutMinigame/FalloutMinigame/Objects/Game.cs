@@ -164,7 +164,7 @@ namespace FalloutMinigame.Objects
                 Console.Write("#");
                 Thread.Sleep(100);
             }
-            Console.WriteLine("\nSystem reboot");
+            Console.WriteLine("\n\nSystem reboot");
             Thread.Sleep(500);
             Menu();
         }
