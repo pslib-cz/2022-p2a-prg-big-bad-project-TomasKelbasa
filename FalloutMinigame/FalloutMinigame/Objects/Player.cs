@@ -11,6 +11,7 @@ namespace FalloutMinigame.Objects
     {
 
         public int XP { get; private set; }
+        public int Level { get; private set; }
 
         public string Name { get; private set; }
         public int TimeBonus { get; private set; }
@@ -19,6 +20,31 @@ namespace FalloutMinigame.Objects
         
             Name = name;
             XP = 0;
+            Level = 0;
+
+        }
+
+        public int AddXP(int xp)
+        {
+            XP += xp;
+            int oldLvl = Level;
+            Level = XP / (90 + XP / 20);
+            if (Level > oldLvl)
+            {
+                for(int i = 0; i < Level - oldLvl;  i++)
+                {
+                    LevelUp();
+                }
+            }
+            return Level;
+        }
+
+        public void LevelUp()
+        {
+
+            Console.Clear();
+            Console.WriteLine("LEVEL UP!");
+            Console.WriteLine("Choose a new perk");
 
         }
 

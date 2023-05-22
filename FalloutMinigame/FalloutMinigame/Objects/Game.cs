@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FalloutMinigame.Objects
@@ -27,13 +28,60 @@ namespace FalloutMinigame.Objects
             return input;
         }
 
-        public void NewLevel(int difficulty, int attempts = 5)
+        public void NewLevel(int attempts = 5)
         {
             Console.Clear();
+            Console.WriteLine("Choose a difficulty:\n[0] - Novice\n[1] - Advanced\n[2] - Expert\n[3] - Master\n[4] - Grandmaster\n[5] - Mr. PY\n");
+            int difficulty = -1;
+            bool converted = false;
+            do
+            {
+                string s = ReadStringInput();
+                if(Regex.IsMatch(s, "^[0-5]$"))
+                {
+                    converted = Int32.TryParse(s, out difficulty);
+                }
+
+                //Console.WriteLine("Converted: " + difficulty);
+
+            } while (!converted);
             Level newlvl = new Level(difficulty, attempts);
+            Console.WriteLine("OK");
+            Console.WriteLine(newlvl.RemainingAttempts);
+            Thread.Sleep(500);
+            Console.Clear();
+            //vypíše output postupně - aby to bylo vizuálně hezké
             foreach (var line in newlvl.GenerateOutput())
             {
-                Console.WriteLine(line.ToString());
+                foreach(var item in line)
+                {
+                    Console.Write(item);
+                    Thread.Sleep(3);
+                }
+                Console.Write("\n");
+            }
+
+            bool won = false;
+
+            while(newlvl.RemainingAttempts > 0 && !won)
+            {
+                string input = ReadStringInput();
+                int output = newlvl.Guess(input);
+                switch (output)
+                {
+                    case -1: Console.WriteLine("ERORR");
+                        break;
+                    case 100: Console.WriteLine("ACESS GRANTED");
+                        won = true;
+                        WonLevel(newlvl.Difficulty, newlvl.RemainingAttempts);
+                        break;
+                    default: Console.WriteLine("SIMILARITY: " + output + " REMAINING ATTEMPTS: " + newlvl.RemainingAttempts);
+                        break;
+                }
+            }
+            if(newlvl.RemainingAttempts <= 0)
+            {
+                LostLevel();
             }
         }
 
@@ -54,10 +102,8 @@ namespace FalloutMinigame.Objects
             do
             {
                 input = ReadStringInput();
-                if (input.Equals("0") || input.Equals("1") || input.Equals("2") || input.Equals("3"))
-                {
-                    break;
-                }
+                if (Regex.IsMatch(input, "^[0-3]$"))break;
+
             } while (true);
             switch (input)
             {
@@ -65,7 +111,7 @@ namespace FalloutMinigame.Objects
                     Help();
                     break;
                 case "1":
-                    NewLevel(2);
+                    NewLevel();
                     break;
                 case "2":
                     Stats();
@@ -95,14 +141,32 @@ namespace FalloutMinigame.Objects
             Menu();
         }
 
+        private void WonLevel(int levelDifficulty, int remainingAttempts) 
+        {
+            int xprewarded = (levelDifficulty + 3) * Random.Shared.Next(4, 8) + remainingAttempts * 2;
+            Thread.Sleep(500);
+            Console.Clear();
+            Console.WriteLine("Terminal has been succesfully hacked!");
+            Console.WriteLine("You gain +" + xprewarded + " XP");
+            currentPlayer.AddXP(xprewarded);
+            Console.ReadLine();
+            Menu();
+        }
+
         private void LostLevel()
         {
             //currentPlayer.LostLevels++;
-            Console.WriteLine("Terminal has been overloaded.");
-            Thread.Sleep(500);
             Console.Clear();
-            Console.WriteLine("Terminal is temporarily locked. Please wait.");
-            Thread.Sleep(10000 - currentPlayer.TimeBonus);
+            Console.WriteLine("Terminal has been overloaded.");
+            Console.WriteLine("Please wait.");
+            for(int i = 0; i < 10000 - currentPlayer.TimeBonus; i += 100)
+            {
+                Console.Write("#");
+                Thread.Sleep(100);
+            }
+            Console.WriteLine("\nSystem reboot");
+            Thread.Sleep(500);
+            Menu();
         }
 
     }

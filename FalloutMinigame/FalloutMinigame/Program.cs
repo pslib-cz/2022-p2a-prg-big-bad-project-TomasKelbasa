@@ -3,3 +3,6 @@ using FalloutMinigame.Objects;
 
 Player tomas = new Player("tomáš");
 Game myGame = new Game(tomas);
+
+
+
