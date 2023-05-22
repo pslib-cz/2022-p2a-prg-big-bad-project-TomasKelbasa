@@ -9,12 +9,31 @@ namespace FalloutMinigame.Objects
 
     internal class Player
     {
-
+        /// <summary>
+        ///     Zkušenosti
+        /// </summary>
         public int XP { get; private set; }
+
+        /// <summary>
+        ///     Level hráče - za každý nový level je hráč odměněn perkpointem
+        /// </summary>
         public int Level { get; private set; }
 
+        /// <summary>
+        ///     Jméno hráče
+        /// </summary>
         public string Name { get; private set; }
-        public int TimeBonus { get; private set; }
+        public int TimeBonus { get; private set; } = 0;
+
+        /// <summary>
+        ///     Počet prohraných levelů
+        /// </summary>
+        public int LostLevels { get; set; } = 0;
+
+        /// <summary>
+        ///     Počet prohraných levelů
+        /// </summary>
+        public int WonLevels {get; set;} = 0;
 
         public Player(string name) {
         
@@ -24,6 +43,11 @@ namespace FalloutMinigame.Objects
 
         }
 
+        /// <summary>
+        ///     Přidá hráči XP a pokud dosáhne nového levelu tak vyvolá metodu LevelUp()
+        /// </summary>
+        /// <param name="xp">počet XP k přidání</param>
+        /// <returns>Aktuální level hráče po přidání XP</returns>
         public int AddXP(int xp)
         {
             XP += xp;
@@ -41,7 +65,6 @@ namespace FalloutMinigame.Objects
 
         public void LevelUp()
         {
-
             Console.Clear();
             Console.WriteLine("LEVEL UP!");
             Console.WriteLine("Choose a new perk");

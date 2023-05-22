@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FalloutMinigame.Objects
 {
-    internal class Level
+    public class Level
     {
         static private int _nextId = 0;
         static private int _defaultDifficulty = 0;

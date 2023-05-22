@@ -10,7 +10,9 @@ namespace FalloutMinigame.Objects
 {
     internal class Game
     {
-
+        /// <summary>
+        ///     Aktuální hráč hrající hru
+        /// </summary>
         public Player currentPlayer { get; private set; }
 
         public Game(Player player)
@@ -18,6 +20,11 @@ namespace FalloutMinigame.Objects
             currentPlayer = player;
             Menu();
         }
+
+        /// <summary>
+        ///     Čte vstup od uživatele z konzole a zároveň ho mírně zformátuje
+        /// </summary>
+        /// <returns>Zformátovaný vstup od uživatele</returns>
 
         private static string ReadStringInput()
         {
@@ -28,6 +35,11 @@ namespace FalloutMinigame.Objects
             return input;
         }
 
+
+        /// <summary>
+        ///     Vytváří nový level o obtížnosti zadané uživatelem. Končí buď zavoláním metody LostGame() nebo WonGame().
+        /// </summary>
+        /// <param name="attempts">Počet pokusů které bude uživatel mít na daný level</param>
         public void NewLevel(int attempts = 5)
         {
             Console.Clear();
@@ -47,7 +59,6 @@ namespace FalloutMinigame.Objects
             } while (!converted);
             Level newlvl = new Level(difficulty, attempts);
             Console.WriteLine("OK");
-            Console.WriteLine(newlvl.RemainingAttempts);
             Thread.Sleep(500);
             Console.Clear();
             //vypíše output postupně - aby to bylo vizuálně hezké
@@ -56,7 +67,7 @@ namespace FalloutMinigame.Objects
                 foreach(var item in line)
                 {
                     Console.Write(item);
-                    Thread.Sleep(3);
+                    Thread.Sleep(1);
                 }
                 Console.Write("\n");
             }
@@ -71,11 +82,11 @@ namespace FalloutMinigame.Objects
                 {
                     case -1: Console.WriteLine("ERORR");
                         break;
-                    case 100: Console.WriteLine("ACESS GRANTED");
+                    case 100: Console.WriteLine("ACCESS GRANTED");
                         won = true;
                         WonLevel(newlvl.Difficulty, newlvl.RemainingAttempts);
                         break;
-                    default: Console.WriteLine("SIMILARITY: " + output + " REMAINING ATTEMPTS: " + newlvl.RemainingAttempts);
+                    default: Console.WriteLine("SIMILARITY: " + output + "; REMAINING ATTEMPTS: " + newlvl.RemainingAttempts);
                         break;
                 }
             }
@@ -85,6 +96,10 @@ namespace FalloutMinigame.Objects
             }
         }
 
+
+        /// <summary>
+        ///     Hlavní menu nabídka - stará se i o čtení inputu od uživatele
+        /// </summary>
         private void Menu()
         {
             Console.Clear();
@@ -95,6 +110,7 @@ namespace FalloutMinigame.Objects
             } catch (FileNotFoundException ex)
             {
                 Console.WriteLine("Logo.txt file not found.");
+                Console.WriteLine(ex);
             }
             Console.WriteLine("\nPlayer: {0}\n", currentPlayer.Name);
             Console.WriteLine("[0] - Help\n[1] - New level\n[2] - Stats\n[3] - Save & Exit\n");
@@ -120,6 +136,10 @@ namespace FalloutMinigame.Objects
                     break;
             }
         }
+
+        /// <summary>
+        ///     Vypíše uživateli nápovědu jak hru hrát
+        /// </summary>
         private void Help()
         {
             Console.Clear();
@@ -132,6 +152,10 @@ namespace FalloutMinigame.Objects
             ReadStringInput();
             Menu();
         }
+
+        /// <summary>
+        ///     Zobrazí statisky o aktuálním hráči
+        /// </summary>
         private void Stats()
         {
             Console.Clear();
@@ -141,21 +165,32 @@ namespace FalloutMinigame.Objects
             Menu();
         }
 
+
+        /// <summary>
+        ///     Vyhodnocení vyhraného levelu (udělení XP)
+        /// </summary>
+        /// <param name="levelDifficulty">Obtížnost levelu (0-5)</param>
+        /// <param name="remainingAttempts">Počet zbylých pokusů daného leveluj</param>
         private void WonLevel(int levelDifficulty, int remainingAttempts) 
         {
+            currentPlayer.WonLevels++;
             int xprewarded = (levelDifficulty + 3) * Random.Shared.Next(4, 8) + remainingAttempts * 2;
             Thread.Sleep(500);
             Console.Clear();
             Console.WriteLine("Terminal has been succesfully hacked!");
             Console.WriteLine("You gain +" + xprewarded + " XP");
             currentPlayer.AddXP(xprewarded);
-            Console.ReadLine();
+            ReadStringInput();
             Menu();
         }
 
+
+        /// <summary>
+        ///     Vyhodnocení prohraného levelu
+        /// </summary>
         private void LostLevel()
         {
-            //currentPlayer.LostLevels++;
+            currentPlayer.LostLevels++;
             Console.Clear();
             Console.WriteLine("Terminal has been overloaded.");
             Console.WriteLine("Please wait.");
