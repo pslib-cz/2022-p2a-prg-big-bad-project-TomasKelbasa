@@ -46,6 +46,20 @@ namespace FalloutMinigame.Objects
 
         }
 
+
+        public static Player LoadPlayer(string name, int xp, int level, int lostlevels, int wonlevels, DateTime created, int timebonus)
+        {
+            Player player = new Player(name);
+
+            player.XP = xp;
+            player.Level = level;
+            player.CreatedAt = created;
+            player.TimeBonus = timebonus;
+            player.WonLevels = wonlevels;
+            player.LostLevels = lostlevels;
+            return player;
+        }
+
         /// <summary>
         ///     Přidá hráči XP a pokud dosáhne nového levelu tak vyvolá metodu LevelUp()
         /// </summary>

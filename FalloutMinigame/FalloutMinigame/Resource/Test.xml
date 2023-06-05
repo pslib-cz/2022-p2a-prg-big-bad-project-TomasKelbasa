@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<player-data>
+	<ID>15</ID>
+	<Name>Tomáš</Name>
+	<Level>1</Level>
+	<XP>120</XP>
+	<LostLevels>2</LostLevels>
+	<WonLevels>10</WonLevels>
+	<TimeBonus>5</TimeBonus>
+	<CreatedAt>-8585156189472199185</CreatedAt>
+</player-data>
