@@ -4,16 +4,20 @@ Imitace minihry z Fallout 4 vytvořená v C#
 ## Desc
 - Jednoduchá slovní minihra s předlohou ve hře Fallou 4
 - V podstatě se jedná o hru kde hádáme slovo [video s vysvětlením](https://youtu.be/bx_4zoUL0aY)
-- Různé obtížnosti termináluů (= více slov na výběr, delší slova)
+- Různé obtížnosti terminálů (= více slov na výběr, delší slova)
 - Po neúspěšném nabourání terminálu se hra na několik sekund uzamkne
 
-## Pokud se budu nudit
-- Savy budou šifrované
-- Systém získávání XP a levelování postavy za správné hacknutí terminálu
-- Systém perků
-- Tajemství
+## Todo
+ - [x] Jádro samotné hry
+ - [X] Konzolové ovládání pro hráče
+ - [X] Statistiky hráče
+ - [X] Nápověda pro hráče
+ - [ ] Systém ukládání (pravděpodobně do .XML souborů)
+ - [ ] Hash klíč do jednotlivých savů (pro ověření že se souborem nebylo manipulováno)
+ - [ ] Opravit ten jeden divnej bug (občas když se vygeneruje level tak jsou slova přímo za sebou což by se dít nemělo)
+ - [ ] Release
 
-### Poděkování
+## Poděkování
 - Chtěl bych poděkovat [této stránce](https://copylists.com/) za vypůjčení seznamů slov
 - Také bych chtěl poděkovat [této stránce](https://patorjk.com/software/taag) za poskytnutí generátoru ASCII artu
 
