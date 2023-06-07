@@ -12,7 +12,7 @@ Imitace minihry z Fallout 4 vytvořená v C#
  - [X] Konzolové ovládání pro hráče
  - [X] Statistiky hráče
  - [X] Nápověda pro hráče
- - [ ] Systém ukládání (pravděpodobně do .XML souborů)
+ - [X] Systém ukládání (pravděpodobně do .XML souborů)
  - [ ] Hash klíč do jednotlivých savů (pro ověření že se souborem nebylo manipulováno)
  - [ ] Opravit ten jeden divnej bug (občas když se vygeneruje level tak jsou slova přímo za sebou což by se dít nemělo)
  - [ ] Release
