@@ -133,6 +133,7 @@ namespace FalloutMinigame.Objects
                     Stats();
                     break;
                 case "3":
+                    SaveExit();
                     break;
             }
         }
@@ -166,6 +167,15 @@ namespace FalloutMinigame.Objects
             Menu();
         }
 
+        private void SaveExit()
+        {
+            Console.Clear();
+            Console.WriteLine("Saving...");
+            Thread.Sleep(500);
+            SaveSystem.SavePlayer(currentPlayer);
+            Console.WriteLine("Success");
+            ReadStringInput();
+        }
 
         /// <summary>
         ///     Vyhodnocení vyhraného levelu (udělení XP)
@@ -174,7 +184,7 @@ namespace FalloutMinigame.Objects
         /// <param name="remainingAttempts">Počet zbylých pokusů daného leveluj</param>
         private void WonLevel(int levelDifficulty, int remainingAttempts) 
         {
-            currentPlayer.WonLevels++;
+            currentPlayer.playerStats["WonLevels"]++;
             int xprewarded = (levelDifficulty + 3) * Random.Shared.Next(4, 8) + remainingAttempts * 2;
             Thread.Sleep(500);
             Console.Clear();
@@ -191,11 +201,11 @@ namespace FalloutMinigame.Objects
         /// </summary>
         private void LostLevel()
         {
-            currentPlayer.LostLevels++;
+            currentPlayer.playerStats["LostLevels"]++;
             Console.Clear();
             Console.WriteLine("Terminal has been overloaded.");
             Console.WriteLine("Please wait.");
-            for(int i = 0; i < 10000 - currentPlayer.TimeBonus; i += 100)
+            for(int i = 0; i < 10000/* - currentPlayer.TimeBonus*/; i += 100)
             {
                 Console.Write("#");
                 Thread.Sleep(100);

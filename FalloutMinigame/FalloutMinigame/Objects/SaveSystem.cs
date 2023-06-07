@@ -14,29 +14,24 @@ namespace FalloutMinigame.Objects
     /// </summary>
     internal class SaveSystem
     {
-
+        
         public static int SavePlayer(Player p)
         {
             string saveDirectory = "./Resource/";
             XmlDocument xmlDoc = new XmlDocument();
             XmlElement rootElement = xmlDoc.CreateElement("player-data");
+            rootElement.SetAttribute("name", p.Name);
             xmlDoc.AppendChild(rootElement);
-            AppendString(ref xmlDoc, ref rootElement, "Level", p.Level.ToString());
-            AppendString(ref xmlDoc, ref rootElement, "XP", p.XP.ToString());
-            AppendString(ref xmlDoc, ref rootElement, "LostLevels", p.LostLevels.ToString());
-            AppendString(ref xmlDoc, ref rootElement, "WonLevels", p.WonLevels.ToString());
+            foreach(var l in p.playerStats)
+            {
+                XmlElement el = xmlDoc.CreateElement(l.Key);
+                el.InnerText = l.Value.ToString();
+                rootElement.AppendChild(el);
+            }
             xmlDoc.Save(saveDirectory + p.Name + ".xml");
 
             return 1;
         }
-
-        public static void AppendString(ref XmlDocument d, ref XmlElement root, string name, string value)
-        {
-            XmlElement el = d.CreateElement(name);
-            el.InnerText = value;
-            root.AppendChild(el);
-        }
-
 
         public static Player LoadPlayer(string path)
         {
@@ -44,18 +39,28 @@ namespace FalloutMinigame.Objects
             XmlDocument xml = new XmlDocument();
             xml.Load(path);
 
+            XmlNode root = xml.SelectSingleNode("player-data");
 
-            return Player.LoadPlayer(ReadStringXML(xml, "Name"), ReadIntXML(xml, "XP"), ReadIntXML(xml, "Level"), ReadIntXML(xml,"LostLevels"), ReadIntXML(xml,"WonLevels"), DateTime.FromBinary(long.Parse(ReadStringXML(xml, "CreatedAt"))), ReadIntXML(xml, "TimeBonus"));
-        }
+            Dictionary<string, long> d = new Dictionary<string, long>();
 
-        public static string ReadStringXML(XmlDocument xml, string name)
-        {
-            return xml.SelectSingleNode("player-data/" + name).InnerText;
-        }
+            XmlNodeList xmlnds = root.ChildNodes;
 
-        public static int ReadIntXML(XmlDocument xml, string name)
-        {
-            return int.Parse(ReadStringXML(xml,name));
+
+            foreach (XmlNode v in xmlnds)
+            {
+                try
+                {
+                    d.Add(v.Name, long.Parse(v.InnerText));
+                }
+                catch (Exception ex){
+
+                    Console.WriteLine("Error on loading save. Continuing with zero");
+                    d.Add(v.Name, 0);
+
+                }
+            }
+
+            return Player.LoadPlayer(d, root.Attributes.GetNamedItem("name").Value);
         }
 
     }

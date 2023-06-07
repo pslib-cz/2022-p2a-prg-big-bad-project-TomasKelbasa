@@ -10,74 +10,64 @@ namespace FalloutMinigame.Objects
     internal class Player
     {
         /// <summary>
-        ///     Zkušenosti
-        /// </summary>
-        public int XP { get; private set; }
-
-        /// <summary>
-        ///     Level hráče - za každý nový level je hráč odměněn perkpointem
-        /// </summary>
-        public int Level { get; private set; }
-
-        /// <summary>
         ///     Jméno hráče
         /// </summary>
         public string Name { get; private set; }
 
-        public DateTime CreatedAt { get; private set; }
-        public int TimeBonus { get; private set; } = 0;
-
-        /// <summary>
-        ///     Počet prohraných levelů
-        /// </summary>
-        public int LostLevels { get; set; } = 0;
-
-        /// <summary>
-        ///     Počet prohraných levelů
-        /// </summary>
-        public int WonLevels {get; set;} = 0;
-
+        public Dictionary<string, long> playerStats { get; private set; } = new Dictionary<string, long>();
         public Player(string name) {
-        
-            CreatedAt = DateTime.Now;
+
             Name = name;
-            XP = 0;
-            Level = 0;
+            playerStats.Add("CreatedAt", DateTime.Now.ToBinary());
+            playerStats.Add("XP", 0);
+            playerStats.Add("Level", 0);
+            playerStats.Add("WonGames", 0);
+            playerStats.Add("LostGames", 0);
+            playerStats.Add("TimeBonus", 0);
 
         }
 
-
-        public static Player LoadPlayer(string name, int xp, int level, int lostlevels, int wonlevels, DateTime created, int timebonus)
+        /// <summary>
+        ///     Working probably
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="name">Jméno hráče</param>
+        /// <returns></returns>
+        public static Player LoadPlayer(Dictionary<string, long> data, string name)
         {
             Player player = new Player(name);
 
-            player.XP = xp;
-            player.Level = level;
-            player.CreatedAt = created;
-            player.TimeBonus = timebonus;
-            player.WonLevels = wonlevels;
-            player.LostLevels = lostlevels;
+            player.playerStats = data;
+            player.Name = name;
+
+            Console.WriteLine("Player name: " + player.Name);
+
+            foreach (var l in player.playerStats)
+            {
+                Console.WriteLine(l);
+            }
+
             return player;
         }
-
+        
         /// <summary>
         ///     Přidá hráči XP a pokud dosáhne nového levelu tak vyvolá metodu LevelUp()
         /// </summary>
         /// <param name="xp">počet XP k přidání</param>
         /// <returns>Aktuální level hráče po přidání XP</returns>
-        public int AddXP(int xp)
+        public long AddXP(int xp)
         {
-            XP += xp;
-            int oldLvl = Level;
-            Level = XP / (90 + XP / 20);
-            if (Level > oldLvl)
+            playerStats["XP"] += xp;
+            long oldLvl = playerStats["Level"];
+            playerStats["Level"] = playerStats["XP"] / (90 + playerStats["XP"] / 20);
+            if (playerStats["Level"] > oldLvl)
             {
-                for(int i = 0; i < Level - oldLvl;  i++)
+                for(int i = 0; i < playerStats["Level"] - oldLvl;  i++)
                 {
                     LevelUp();
                 }
             }
-            return Level;
+            return playerStats["Level"];
         }
 
         public void LevelUp()
@@ -90,17 +80,16 @@ namespace FalloutMinigame.Objects
 
         public string GetStats()
         {
-            string stats = string.Empty;
-            stats += "Name: " + Name;
-            stats += "\nCreated at: " + CreatedAt;
-            stats += "\nLevel: " + Level;
-            stats += "\nXP: " + XP;
-            stats += "\nLevelsPlayed: " + (WonLevels + LostLevels);
-            stats += "\nWonLevels: " + WonLevels;
-            stats += "\nLostLevels: " + LostLevels;
+            string output = string.Empty;
 
-            return stats;
+            output += "Name: " + Name;
+
+            foreach(var stat in playerStats) output += "\n" + stat.Key + ": " + stat.Value;
+
+            output += "\n" + "CreatedAt (formated): " + DateTime.FromBinary(playerStats["CreatedAt"]).ToString();
+
+            return output;
         }
-
+        
     }
 }

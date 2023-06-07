@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<player-data>
-	<ID>15</ID>
-	<Name>Tomáš</Name>
+<player-data name="Tomáš">
 	<Level>1</Level>
 	<XP>120</XP>
 	<LostLevels>2</LostLevels>
