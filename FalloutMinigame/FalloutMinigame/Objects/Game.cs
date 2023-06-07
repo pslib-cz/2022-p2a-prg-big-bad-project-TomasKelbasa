@@ -62,12 +62,13 @@ namespace FalloutMinigame.Objects
             Thread.Sleep(500);
             Console.Clear();
             //vypíše output postupně - aby to bylo vizuálně hezké
+            bool WAIT = true;
             foreach (var line in newlvl.GenerateOutput())
             {
                 foreach(var item in line)
                 {
-                    Console.Write(item);
-                    Thread.Sleep(1);
+                   Console.Write(item);
+                   if(WAIT) Thread.Sleep(1);
                 }
                 Console.Write("\n");
             }

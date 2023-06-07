@@ -42,3 +42,4 @@ C:\Users\tomas.kelbasa.021\Source\Repos\2022-p2a-prg-big-bad-project-TomasKelbas
 C:\Users\tomas.kelbasa.021\Source\Repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Debug\net6.0\FalloutMinigame.pdb
 C:\Users\tomas.kelbasa.021\Source\Repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\obj\Debug\net6.0\FalloutMinigame.genruntimeconfig.cache
 C:\Users\tomas.kelbasa.021\Source\Repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\obj\Debug\net6.0\ref\FalloutMinigame.dll
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Debug\net6.0\Resource\Saves\Test.xml

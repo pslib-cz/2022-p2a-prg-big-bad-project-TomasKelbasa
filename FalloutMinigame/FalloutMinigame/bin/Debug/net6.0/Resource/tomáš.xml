@@ -1,8 +1,8 @@
 <player-data name="Tomáš">
   <Level>1</Level>
-  <XP>145</XP>
+  <XP>120</XP>
   <LostLevels>2</LostLevels>
-  <WonLevels>11</WonLevels>
+  <WonLevels>10</WonLevels>
   <TimeBonus>5</TimeBonus>
   <CreatedAt>-8585156189472199185</CreatedAt>
 </player-data>

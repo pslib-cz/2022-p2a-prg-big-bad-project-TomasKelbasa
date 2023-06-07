@@ -40,12 +40,7 @@ namespace FalloutMinigame.Objects
             player.playerStats = data;
             player.Name = name;
 
-            Console.WriteLine("Player name: " + player.Name);
-
-            foreach (var l in player.playerStats)
-            {
-                Console.WriteLine(l);
-            }
+            Console.WriteLine("Player loaded: " + player.Name);
 
             return player;
         }
@@ -69,7 +64,7 @@ namespace FalloutMinigame.Objects
             }
             return playerStats["Level"];
         }
-
+        //TODO
         public void LevelUp()
         {
             Console.Clear();
