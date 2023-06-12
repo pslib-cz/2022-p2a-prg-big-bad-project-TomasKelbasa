@@ -21,8 +21,8 @@ namespace FalloutMinigame.Objects
             playerStats.Add("CreatedAt", DateTime.Now.ToBinary());
             playerStats.Add("XP", 0);
             playerStats.Add("Level", 0);
-            playerStats.Add("WonGames", 0);
-            playerStats.Add("LostGames", 0);
+            playerStats.Add("WonLevels", 0);
+            playerStats.Add("LostLevels", 0);
             playerStats.Add("TimeBonus", 0);
 
         }

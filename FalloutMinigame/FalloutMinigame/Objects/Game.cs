@@ -15,9 +15,14 @@ namespace FalloutMinigame.Objects
         /// </summary>
         public Player currentPlayer { get; private set; }
 
+        private const ConsoleColor consoleNormal = ConsoleColor.White;
+        private const ConsoleColor consoleHighlight = ConsoleColor.Red;
+        private const ConsoleColor consoleUser = ConsoleColor.Blue;
+
         public Game(Player player)
         {
             currentPlayer = player;
+            Console.ForegroundColor = consoleNormal;
             Menu();
         }
 
@@ -28,10 +33,12 @@ namespace FalloutMinigame.Objects
 
         private static string ReadStringInput()
         {
+            Console.ForegroundColor = consoleUser;
             Console.Write("> ");
             string input = "" + Console.ReadLine();
             input = input.ToUpper();
             input = input.Trim();
+            Console.ForegroundColor = consoleNormal;
             return input;
         }
 
@@ -65,9 +72,19 @@ namespace FalloutMinigame.Objects
             bool WAIT = true;
             foreach (var line in newlvl.GenerateOutput())
             {
-                foreach(var item in line)
+                for(int i = 0; i < line.Length; i++)
                 {
-                   Console.Write(item);
+                    if (i > 5 && line[i] >= 65 && line[i] <= 90) 
+                    { 
+                        Console.ForegroundColor = consoleHighlight;
+                        Console.Write(line[i]);
+                        Console.ForegroundColor = consoleNormal;
+                    }
+                    else
+                    {
+                        Console.Write(line[i]);
+                    }
+
                    if(WAIT) Thread.Sleep(1);
                 }
                 Console.Write("\n");
@@ -145,7 +162,7 @@ namespace FalloutMinigame.Objects
         private void Help()
         {
             Console.Clear();
-            Console.WriteLine("Vítej ve hře Fallout Hacking!\nTvým úkolem je zde prolamovat terminály. Za úspěšné prolomení terminálu budeš odměněn XP, za neúspěšné budeš časově penalyzován.");
+            Console.WriteLine("Vítej ve hře Fallout Hacking!\n\nTvým úkolem je zde prolamovat terminály. Za úspěšné prolomení terminálu budeš odměněn XP, za neúspěšné budeš časově penalyzován.");
             Console.WriteLine("Jak ale funguje nabourávání terminálů? Skvělá otázka. Máš vždy pouze pár pokusů na to uhodnout správné heslo. Heslo je vždy jedno ze slov, které uvidíš. Naštěstí pokud zvolíš nesprávné heslo, tak se dozvíš kolik znaků je správných.");
             Console.WriteLine("\nPříklad - správným heslem je slovo HUMAN avšak hráč zvolil slovo CURVE. Počítač mu řekne že pouze jeden znak je správný (jedná se o písmenu U). Poté hráč zvolil slovo MOTOR, na to mu počítač odpověděl nulou (žádný znak není správně).");
             Console.WriteLine("\nBohužel když hráči dojdou pokusy, tak prohrál a musí počkat několik sekund než bude moct znovu hrát.");
@@ -205,12 +222,32 @@ namespace FalloutMinigame.Objects
             currentPlayer.playerStats["LostLevels"]++;
             Console.Clear();
             Console.WriteLine("Terminal has been overloaded.");
-            Console.WriteLine("Please wait.");
-            for(int i = 0; i < 10000/* - currentPlayer.TimeBonus*/; i += 100)
+            Console.WriteLine("Please wait.\n");
+
+            // LOADBAR
+            Console.CursorVisible = false;
+            for(int i = 0; i < 50/* - currentPlayer.TimeBonus*/; i++)
             {
-                Console.Write("#");
-                Thread.Sleep(100);
+                string output = "[";
+                for(int j = 0; j < i; j++)
+                {
+                    output += "#";
+                }
+                for(int k = 0; k < (49 - i); k++)
+                {
+                    output += " ";
+                }
+                output += "]";
+                Console.Write(output);
+                Thread.Sleep(200);
+                string del = "";
+                for(int l = 0; l < 52; l++)
+                {
+                    del += "\b";
+                }
+                Console.Write(del);
             }
+            Console.CursorVisible = true;
             Console.WriteLine("\n\nSystem reboot");
             Thread.Sleep(500);
             Menu();
