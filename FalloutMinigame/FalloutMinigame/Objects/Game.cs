@@ -192,6 +192,7 @@ namespace FalloutMinigame.Objects
             Thread.Sleep(500);
             SaveSystem.SavePlayer(currentPlayer);
             Console.WriteLine("Success");
+            Console.WriteLine("\nPress Enter to quit");
             ReadStringInput();
         }
 
@@ -226,25 +227,16 @@ namespace FalloutMinigame.Objects
 
             // LOADBAR
             Console.CursorVisible = false;
-            for(int i = 0; i < 50/* - currentPlayer.TimeBonus*/; i++)
+            string output = "[#" + new string(' ', 49) + "]";
+            string del = new string('\b', 52);
+
+            for (int i = 0; i < 50; i++)
             {
-                string output = "[";
-                for(int j = 0; j < i; j++)
-                {
-                    output += "#";
-                }
-                for(int k = 0; k < (49 - i); k++)
-                {
-                    output += " ";
-                }
-                output += "]";
+
+                output = output.Replace("# ", "##");
                 Console.Write(output);
-                Thread.Sleep(200);
-                string del = "";
-                for(int l = 0; l < 52; l++)
-                {
-                    del += "\b";
-                }
+                Thread.Sleep(200 /* -currentPlayer.TimeBonus */);
+
                 Console.Write(del);
             }
             Console.CursorVisible = true;

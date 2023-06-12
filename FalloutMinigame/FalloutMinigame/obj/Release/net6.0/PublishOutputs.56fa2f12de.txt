@@ -1,0 +1,13 @@
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\Resource\4_letter.txt
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\Resource\5_letter.txt
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\Resource\6_letter.txt
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\Resource\7_letter.txt
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\Resource\8_letter.txt
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\Resource\9_letter.txt
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\Resource\Logo.txt
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\Resource\Saves\Test.xml
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\FalloutMinigame.exe
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\FalloutMinigame.dll
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\FalloutMinigame.deps.json
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\FalloutMinigame.runtimeconfig.json
+C:\Users\tomas\source\repos\2022-p2a-prg-big-bad-project-TomasKelbasa\FalloutMinigame\FalloutMinigame\bin\Release\net6.0\publish\FalloutMinigame.pdb
