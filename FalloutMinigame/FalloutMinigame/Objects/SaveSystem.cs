@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Xml;
 
 namespace FalloutMinigame.Objects
 {
@@ -16,18 +9,15 @@ namespace FalloutMinigame.Objects
     internal class SaveSystem
     {
 
-        private static string SAVES_PATH = "./Resource/Saves/";
+        public static string SAVES_PATH { get; set; } = "./Resource/Saves/";
 
         public static List<string> GetSaves()
         {
             if (Directory.Exists(SAVES_PATH))
             {
-                List<string> savesPaths = new List<string> ();
-                foreach(var f in Directory.GetFiles(SAVES_PATH, "*.xml"))
-                {
-                    savesPaths.Add(f);
+                List<string> savesPaths = new List<string>();
+                foreach (var f in Directory.GetFiles(SAVES_PATH, "*.xml")) savesPaths.Add(f);
 
-                }
                 return savesPaths;
             }
             else
@@ -35,7 +25,7 @@ namespace FalloutMinigame.Objects
                 throw new DirectoryNotFoundException();
             }
 
-    
+
         }
 
         public static int SavePlayer(Player p, string path)
@@ -54,7 +44,8 @@ namespace FalloutMinigame.Objects
             {
                 xmlDoc.Save(path + p.Name + ".xml");
                 return 1;
-            }catch (Exception ex)
+            }
+            catch
             {
                 return -1;
             }
@@ -67,9 +58,10 @@ namespace FalloutMinigame.Objects
 
         public static Player LoadPlayer(string path)
         {
-            if(!File.Exists(path)) throw new FileNotFoundException();
+            if (!File.Exists(path)) throw new FileNotFoundException();
             XmlDocument xml = new XmlDocument();
             xml.Load(path);
+
 
             XmlNode root = xml.SelectSingleNode("player-data");
 
@@ -84,14 +76,14 @@ namespace FalloutMinigame.Objects
                 {
                     d.Add(v.Name, long.Parse(v.InnerText));
                 }
-                catch (Exception ex){
+                catch
+                {
 
                     Console.WriteLine("Error on loading save. Continuing with zero");
                     d.Add(v.Name, 0);
 
                 }
             }
-
             return Player.LoadPlayer(d, root.Attributes.GetNamedItem("name").Value);
         }
 

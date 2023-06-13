@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FalloutMinigame.Objects
+﻿namespace FalloutMinigame.Objects
 {
 
     internal class Player
@@ -15,7 +9,8 @@ namespace FalloutMinigame.Objects
         public string Name { get; private set; }
 
         public Dictionary<string, long> playerStats { get; private set; } = new Dictionary<string, long>();
-        public Player(string name) {
+        public Player(string name)
+        {
 
             Name = name;
             playerStats.Add("CreatedAt", DateTime.Now.ToBinary());
@@ -23,6 +18,7 @@ namespace FalloutMinigame.Objects
             playerStats.Add("Level", 0);
             playerStats.Add("WonLevels", 0);
             playerStats.Add("LostLevels", 0);
+            playerStats.Add("GuessBonus", 0);
             playerStats.Add("TimeBonus", 0);
 
         }
@@ -44,7 +40,7 @@ namespace FalloutMinigame.Objects
 
             return player;
         }
-        
+
         /// <summary>
         ///     Přidá hráči XP a pokud dosáhne nového levelu tak vyvolá metodu LevelUp()
         /// </summary>
@@ -57,19 +53,37 @@ namespace FalloutMinigame.Objects
             playerStats["Level"] = playerStats["XP"] / (90 + playerStats["XP"] / 20);
             if (playerStats["Level"] > oldLvl)
             {
-                for(int i = 0; i < playerStats["Level"] - oldLvl;  i++)
+                for (int i = 0; i < playerStats["Level"] - oldLvl; i++)
                 {
                     LevelUp();
                 }
             }
             return playerStats["Level"];
         }
-        //TODO
+
         public void LevelUp()
         {
-            Console.Clear();
             Console.WriteLine("LEVEL UP!");
-            Console.WriteLine("Choose a new perk");
+            Console.Write("You gain: ");
+            int r = Random.Shared.Next(0,2);
+            switch (r)
+            {
+                case 0:
+                    Console.Write("+1 Extra Guess");
+                    playerStats["GuessBonus"]++;
+                    break;
+                case 1:
+                    Console.Write("-0.5s Overload time");
+                    playerStats["TimeBonus"] += 10;
+                    break;
+                case 2:
+                    Console.Write("Nothing");
+                    break;
+                default:
+                    break;
+            }
+            Console.Write("\n");
+
 
         }
 
@@ -79,12 +93,12 @@ namespace FalloutMinigame.Objects
 
             output += "Name: " + Name;
 
-            foreach(var stat in playerStats) output += "\n" + stat.Key + ": " + stat.Value;
+            foreach (var stat in playerStats) output += "\n" + stat.Key + ": " + stat.Value;
 
             output += "\n" + "CreatedAt (formated): " + DateTime.FromBinary(playerStats["CreatedAt"]).ToString();
 
             return output;
         }
-        
+
     }
 }

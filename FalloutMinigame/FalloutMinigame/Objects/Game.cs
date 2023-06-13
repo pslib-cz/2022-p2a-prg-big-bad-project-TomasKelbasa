@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace FalloutMinigame.Objects
 {
@@ -56,7 +50,7 @@ namespace FalloutMinigame.Objects
             do
             {
                 string s = ReadStringInput();
-                if(Regex.IsMatch(s, "^[0-5]$"))
+                if (Regex.IsMatch(s, "^[0-5]$"))
                 {
                     converted = Int32.TryParse(s, out difficulty);
                 }
@@ -64,7 +58,7 @@ namespace FalloutMinigame.Objects
                 //Console.WriteLine("Converted: " + difficulty);
 
             } while (!converted);
-            Level newlvl = new Level(difficulty, attempts);
+            Level newlvl = new Level(difficulty, attempts + (int)currentPlayer.playerStats["GuessBonus"]);
             Console.WriteLine("OK");
             Thread.Sleep(500);
             Console.Clear();
@@ -72,10 +66,10 @@ namespace FalloutMinigame.Objects
             bool WAIT = true;
             foreach (var line in newlvl.GenerateOutput())
             {
-                for(int i = 0; i < line.Length; i++)
+                for (int i = 0; i < line.Length; i++)
                 {
-                    if (i > 5 && line[i] >= 65 && line[i] <= 90) 
-                    { 
+                    if (i > 5 && line[i] >= 65 && line[i] <= 90)
+                    {
                         Console.ForegroundColor = consoleHighlight;
                         Console.Write(line[i]);
                         Console.ForegroundColor = consoleNormal;
@@ -85,30 +79,33 @@ namespace FalloutMinigame.Objects
                         Console.Write(line[i]);
                     }
 
-                   if(WAIT) Thread.Sleep(1);
+                    if (WAIT) Thread.Sleep(1);
                 }
                 Console.Write("\n");
             }
 
             bool won = false;
 
-            while(newlvl.RemainingAttempts > 0 && !won)
+            while (newlvl.RemainingAttempts > 0 && !won)
             {
                 string input = ReadStringInput();
                 int output = newlvl.Guess(input);
                 switch (output)
                 {
-                    case -1: Console.WriteLine("ERORR");
+                    case -1:
+                        Console.WriteLine("ERORR");
                         break;
-                    case 100: Console.WriteLine("ACCESS GRANTED");
+                    case 100:
+                        Console.WriteLine("ACCESS GRANTED");
                         won = true;
                         WonLevel(newlvl.Difficulty, newlvl.RemainingAttempts);
                         break;
-                    default: Console.WriteLine("SIMILARITY: " + output + "; REMAINING ATTEMPTS: " + newlvl.RemainingAttempts);
+                    default:
+                        Console.WriteLine("SIMILARITY: " + output + "; REMAINING ATTEMPTS: " + newlvl.RemainingAttempts);
                         break;
                 }
             }
-            if(newlvl.RemainingAttempts <= 0)
+            if (newlvl.RemainingAttempts <= 0)
             {
                 LostLevel();
             }
@@ -121,11 +118,13 @@ namespace FalloutMinigame.Objects
         private void Menu()
         {
             Console.Clear();
-            try {
+            try
+            {
 
                 Console.WriteLine(new StreamReader("./Resource/Logo.txt").ReadToEnd());
 
-            } catch (FileNotFoundException ex)
+            }
+            catch (FileNotFoundException ex)
             {
                 Console.WriteLine("Logo.txt file not found.");
                 Console.WriteLine(ex);
@@ -136,7 +135,7 @@ namespace FalloutMinigame.Objects
             do
             {
                 input = ReadStringInput();
-                if (Regex.IsMatch(input, "^[0-3]$"))break;
+                if (Regex.IsMatch(input, "^[0-3]$")) break;
 
             } while (true);
             switch (input)
@@ -201,7 +200,7 @@ namespace FalloutMinigame.Objects
         /// </summary>
         /// <param name="levelDifficulty">Obtížnost levelu (0-5)</param>
         /// <param name="remainingAttempts">Počet zbylých pokusů daného leveluj</param>
-        private void WonLevel(int levelDifficulty, int remainingAttempts) 
+        private void WonLevel(int levelDifficulty, int remainingAttempts)
         {
             currentPlayer.playerStats["WonLevels"]++;
             int xprewarded = (levelDifficulty + 3) * Random.Shared.Next(4, 8) + remainingAttempts * 2;
@@ -235,7 +234,7 @@ namespace FalloutMinigame.Objects
 
                 output = output.Replace("# ", "##");
                 Console.Write(output);
-                Thread.Sleep(200 /* -currentPlayer.TimeBonus */);
+                Thread.Sleep(200 - (int)currentPlayer.playerStats["TimeBonus"]);
 
                 Console.Write(del);
             }

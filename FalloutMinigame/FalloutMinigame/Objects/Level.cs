@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FalloutMinigame.Objects
+﻿namespace FalloutMinigame.Objects
 {
     public class Level
     {
@@ -18,12 +11,15 @@ namespace FalloutMinigame.Objects
             return _nextId++;
         }
 
-        public int Id { get;private set; }
+        public int Id { get; private set; }
         public int Difficulty { get; private set; }
         public List<string> Words { get; private set; }
-        public int WordsCount { get 
+        public int WordsCount
+        {
+            get
             { return 8 + Difficulty * 2; }
-            private set { } }
+            private set { }
+        }
         private string _correctWord = "";
         public int RemainingAttempts { get; private set; }
 
@@ -34,12 +30,12 @@ namespace FalloutMinigame.Objects
         /// <param name="attempts">Počet pokusů</param>
         public Level(int difficulty, int attempts = 5)
         {
-            if(difficulty >= 0 && difficulty <= 5) Difficulty = difficulty;
+            if (difficulty >= 0 && difficulty <= 5) Difficulty = difficulty;
             else Difficulty = _defaultDifficulty;
             Id = GenerateId();
             Words = GenerateWords();
             _correctWord = Words[Random.Shared.Next(0, Words.Count)];
-            if(attempts > 0)
+            if (attempts > 0)
             {
                 RemainingAttempts = attempts;
             }
@@ -57,7 +53,7 @@ namespace FalloutMinigame.Objects
         private List<string> GenerateWords()
         {
             List<string> words = new List<string>();
-            String[] possibleWords = new string[] {};
+            String[] possibleWords = new string[] { };
             try
             {
                 StreamReader reader = new StreamReader("./Resource/" + (Difficulty + 4).ToString() + "_letter.txt");
@@ -67,7 +63,7 @@ namespace FalloutMinigame.Objects
             {
                 Console.WriteLine(e);
             }
-            while(words.Count < WordsCount)
+            while (words.Count < WordsCount)
             {
                 int rnd = Random.Shared.Next(0, possibleWords.Length);
                 if (!words.Contains(possibleWords[rnd]))
@@ -87,11 +83,11 @@ namespace FalloutMinigame.Objects
         {
             List<string> output = new List<string>();
             int[] wordsPerLine = new int[_numberOfLines];
-            for(int i = 0; i < wordsPerLine.Length; i++)
+            for (int i = 0; i < wordsPerLine.Length; i++)
             {
                 wordsPerLine[i] = 0;
             }
-            while(wordsPerLine.Sum() < WordsCount)
+            while (wordsPerLine.Sum() < WordsCount)
             {
                 int rnd = Random.Shared.Next(0, wordsPerLine.Count());
                 if (wordsPerLine[rnd] < 3)
@@ -107,21 +103,21 @@ namespace FalloutMinigame.Objects
             };
             int counter = 0;
             int c = Random.Shared.Next(17, 50);
-            foreach(int i in wordsPerLine)
+            foreach (int i in wordsPerLine)
             {
                 int o = i;
                 string line = exampleLine.Substring(0);
-                while(o > 0)
+                while (o > 0)
                 {
-                    int rnd = Random.Shared.Next(1,exampleLine.Length - Words[0].Length);
+                    int rnd = Random.Shared.Next(1, exampleLine.Length - Words[0].Length);
                     if (exampleLine.Contains(line.Substring(rnd - 1, Words[0].Length + 1)))
-                    {   
+                    {
                         line = line.Substring(0, rnd) + Words[counter] + line.Substring(rnd + Words[0].Length);
                         counter++;
                         o--;
                     }
                 }
-                for(int q = 0; q < line.Length; q++)
+                for (int q = 0; q < line.Length; q++)
                 {
                     if (line[q].Equals('#'))
                     {
