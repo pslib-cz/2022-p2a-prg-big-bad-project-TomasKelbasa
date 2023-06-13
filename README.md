@@ -1,7 +1,7 @@
 # Fallout 4 Hacking Minigame ☢️🖥️👨🏻‍💻
 Imitace minihry z Fallout 4 vytvořená v C#
 
-## Desc🗈
+## Desc🗒️
 - Jednoduchá slovní minihra s předlohou ve hře Fallou 4
 - V podstatě se jedná o hru kde hádáme slovo [video s vysvětlením](https://youtu.be/bx_4zoUL0aY)
 - Různé obtížnosti terminálů (= více slov na výběr, delší slova)
@@ -16,7 +16,7 @@ Imitace minihry z Fallout 4 vytvořená v C#
 - Strhující příběh
 - Autentická Fallout atmosféra
 
-## Todo
+## Todo✏️
  - [X] Jádro samotné hry
  - [X] Konzolové ovládání pro hráče
  - [X] Statistiky hráče
@@ -24,7 +24,7 @@ Imitace minihry z Fallout 4 vytvořená v C#
  - [X] Systém ukládání (pravděpodobně do .XML souborů)
  - [X] Release
 
-## Poděkování
+## Poděkování💖
 - Chtěl bych poděkovat [této stránce](https://copylists.com/) za vypůjčení seznamů slov
 - Také bych chtěl poděkovat [této stránce](https://patorjk.com/software/taag) za poskytnutí generátoru ASCII artu
 
