@@ -1,11 +1,20 @@
 # Fallout 4 Hacking Minigame ☢️🖥️👨🏻‍💻
 Imitace minihry z Fallout 4 vytvořená v C#
 
-## Desc
+## Desc🗈
 - Jednoduchá slovní minihra s předlohou ve hře Fallou 4
 - V podstatě se jedná o hru kde hádáme slovo [video s vysvětlením](https://youtu.be/bx_4zoUL0aY)
 - Různé obtížnosti terminálů (= více slov na výběr, delší slova)
 - Po neúspěšném nabourání terminálu se hra na několik sekund uzamkne
+
+## Features✨ (= důvody pro dobrou známku)
+- Ascii artové logo hry
+- Skvělý save system
+- Různé barvy textu
+- GitHub release hry
+- Částečná dokumentace
+- Strhující příběh
+- Autentická Fallout atmosféra
 
 ## Todo
  - [X] Jádro samotné hry
