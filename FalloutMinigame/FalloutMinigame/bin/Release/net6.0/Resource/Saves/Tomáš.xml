@@ -1,7 +1,7 @@
 <player-data name="Tomáš">
   <Level>1</Level>
   <XP>120</XP>
-  <LostLevels>3</LostLevels>
+  <LostLevels>2</LostLevels>
   <WonLevels>10</WonLevels>
   <TimeBonus>5</TimeBonus>
   <GuessBonus>0</GuessBonus>
