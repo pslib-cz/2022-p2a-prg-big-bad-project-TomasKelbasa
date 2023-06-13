@@ -8,12 +8,12 @@ Imitace minihry z Fallout 4 vytvořená v C#
 - Po neúspěšném nabourání terminálu se hra na několik sekund uzamkne
 
 ## Todo
- - [x] Jádro samotné hry
+ - [X] Jádro samotné hry
  - [X] Konzolové ovládání pro hráče
  - [X] Statistiky hráče
  - [X] Nápověda pro hráče
  - [X] Systém ukládání (pravděpodobně do .XML souborů)
- - [ ] Release
+ - [X] Release
 
 ## Poděkování
 - Chtěl bych poděkovat [této stránce](https://copylists.com/) za vypůjčení seznamů slov
